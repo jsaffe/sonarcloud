@@ -21,9 +21,13 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          organization: jsaffe
-          projectKey: sonarcloud
           projectBaseDir: frontend/
+          args: >
+            -Dsonar.projectKey=sonarcloud
+            -Dsonar.organization=jsaffe
+            -Dsonar.sources=.
+            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.login=$SONAR_TOKEN          
           
   static_scan_backend:
     name: SonarCloudScan
@@ -37,9 +41,13 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          organization: jsaffe
-          projectKey: sonarcloud
           projectBaseDir: backend/
+          args: >
+            -Dsonar.projectKey=sonarcloud
+            -Dsonar.organization=jsaffe
+            -Dsonar.sources=.
+            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.login=$SONAR_TOKEN
 
   build:
     runs-on: ubuntu-latest
