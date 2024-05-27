@@ -24,7 +24,7 @@ jobs:
           projectBaseDir: frontend/
           args: >
             -Dsonar.organization=jsaffe
-            -Dsonar.projectKey=sonarcloud
+            -Dsonar.projectKey=jsaffe_sonarcloud
             -Dsonar.token=$SONAR_TOKEN          
           
   static_scan_backend:
@@ -42,7 +42,7 @@ jobs:
           projectBaseDir: backend/
           args: >
             -Dsonar.organization=jsaffe
-            -Dsonar.projectKey=sonarcloud
+            -Dsonar.projectKey=jsaffe_sonarcloud
             -Dsonar.token=$SONAR_TOKEN
 
   build:
