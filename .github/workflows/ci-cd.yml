@@ -9,9 +9,36 @@ on:
       - main
 
 jobs:
+  static_scan_frontend:
+    name: SonarCloudScan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          projectBaseDir: frontend/
+
+  static_scan_backend:
+    name: SonarCloudScan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          projectBaseDir: backend/
+
   build:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -23,18 +50,3 @@ jobs:
       run: |
         docker-compose build
         docker-compose push
-
-    - name: Run static analysis
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: |
-        echo ${SONAR_TOKEN} # This is just to ensure the token is set, it will be masked in the logs
-        sonar-scanner \
-          -Dsonar.organization=jsaffe \
-          -Dsonar.projectKey=sonarcloud \
-          -Dsonar.sources=. \
-          -Dsonar.host.url=https://sonarcloud.io \
-          -Dsonar.login=${SONAR_TOKEN}
-
-    - name: Deploy to test environment
-      run: docker-compose up -d
