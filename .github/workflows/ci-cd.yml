@@ -33,7 +33,7 @@ jobs:
           -Dsonar.projectKey=sonarcloud  # Your SonarCloud project key
           -Dsonar.sources=.
           -Dsonar.host.url=https://sonarcloud.io
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }}  # Ensure SONAR_TOKEN is set as a secret in your repository
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }}  # Ensure SONAR_TOKEN is set as a secret in your repository 
 
     - name: Deploy to test environment
       run: docker-compose up -d
