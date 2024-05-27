@@ -9,7 +9,7 @@ on:
 
 jobs:
   static_scan_frontend:
-    name: SonarCloudScan
+    name: static_scan_frontend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -27,7 +27,7 @@ jobs:
             -Dsonar.token=$SONAR_TOKEN          
           
   static_scan_backend:
-    name: SonarCloudScan
+    name: static_scan_backend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -56,4 +56,3 @@ jobs:
     - name: Build and push Docker images
       run: |
         docker-compose build
-        docker-compose push
