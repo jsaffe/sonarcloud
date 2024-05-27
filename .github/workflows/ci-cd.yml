@@ -22,7 +22,9 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: frontend/
-
+          sonar.organization: jsaffe
+          sonar.projectKey: sonarcloud
+          
   static_scan_backend:
     name: SonarCloudScan
     runs-on: ubuntu-latest
@@ -36,6 +38,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: backend/
+          sonar.organization: jsaffe
+          sonar.projectKey: sonarcloud
 
   build:
     runs-on: ubuntu-latest
