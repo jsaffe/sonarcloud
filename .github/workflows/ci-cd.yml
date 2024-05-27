@@ -14,10 +14,10 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Docker
-      uses: docker/setup-buildx-action@v1
+      uses: docker/setup-buildx-action@v2
 
     - name: Build and push Docker images
       run: |
@@ -29,11 +29,11 @@ jobs:
       with:
         args: >
           sonar-scanner
-          -Dsonar.organization=your-org
-          -Dsonar.projectKey=your-project
+          -Dsonar.organization=jsaffe  # Your SonarCloud organization key
+          -Dsonar.projectKey=sonarcloud  # Your SonarCloud project key
           -Dsonar.sources=.
           -Dsonar.host.url=https://sonarcloud.io
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }}  # Ensure SONAR_TOKEN is set as a secret in your repository
 
     - name: Deploy to test environment
       run: docker-compose up -d
