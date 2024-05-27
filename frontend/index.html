@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+    <script>
+        async function fetchContainerId() {
+            const response = await fetch('http://localhost:8000/api/container-id/');
+            const data = await response.json();
+            document.getElementById('container-id').innerText = data.container_id;
+        }
+    </script>
+</head>
+<body onload="fetchContainerId()">
+    <h1>Welcome to the Frontend Service</h1>
+    <p>Your backend container ID is: <span id="container-id">Loading...</span></p>
+</body>
+</html>
