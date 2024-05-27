@@ -25,15 +25,16 @@ jobs:
         docker-compose push
 
     - name: Run static analysis
-      uses: sonarsource/sonarcloud-github-action@master
-      with:
-        args: >
-          sonar-scanner
-          -Dsonar.organization=jsaffe  # Your SonarCloud organization key
-          -Dsonar.projectKey=sonarcloud  # Your SonarCloud project key
-          -Dsonar.sources=.
-          -Dsonar.host.url=https://sonarcloud.io
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }}  # Ensure SONAR_TOKEN is set as a secret in your repository 
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: |
+        echo ${SONAR_TOKEN} # This is just to ensure the token is set, it will be masked in the logs
+        sonar-scanner \
+          -Dsonar.organization=jsaffe \
+          -Dsonar.projectKey=sonarcloud \
+          -Dsonar.sources=. \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=${SONAR_TOKEN}
 
     - name: Deploy to test environment
       run: docker-compose up -d
