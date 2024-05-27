@@ -23,11 +23,9 @@ jobs:
         with:
           projectBaseDir: frontend/
           args: >
-            -Dsonar.projectKey=sonarcloud
             -Dsonar.organization=jsaffe
-            -Dsonar.sources=.
-            -Dsonar.host.url=https://sonarcloud.io
-            -Dsonar.login=$SONAR_TOKEN          
+            -Dsonar.projectKey=sonarcloud
+            -Dsonar.token=$SONAR_TOKEN          
           
   static_scan_backend:
     name: SonarCloudScan
@@ -43,11 +41,9 @@ jobs:
         with:
           projectBaseDir: backend/
           args: >
-            -Dsonar.projectKey=sonarcloud
             -Dsonar.organization=jsaffe
-            -Dsonar.sources=.
-            -Dsonar.host.url=https://sonarcloud.io
-            -Dsonar.login=$SONAR_TOKEN
+            -Dsonar.projectKey=sonarcloud
+            -Dsonar.token=$SONAR_TOKEN
 
   build:
     runs-on: ubuntu-latest
